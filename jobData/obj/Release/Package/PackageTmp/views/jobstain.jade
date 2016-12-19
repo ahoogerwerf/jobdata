@@ -1,0 +1,20 @@
+﻿extends layout
+
+block content
+ div
+  xlarge#idmill Mill: #{Mill}
+ div
+  xlarge#idjob Job: #{Job}
+ div
+  xlarge#idstain Stain: #{Stain}
+ script.
+     var server = new EventSource('/evupdate');
+     server.onmessage = function(e) {
+     var jsonData = JSON.parse(e.data);
+
+     console.log(jsonData);
+     document.getElementById('idmill').innerHTML='Mill: ' + jsonData.Mill;
+     document.getElementById('idjob').innerHTML='Job: ' + jsonData.Job;
+     document.getElementById('idstain').innerHTML='Stain: ' + jsonData.Stain;
+
+     };
